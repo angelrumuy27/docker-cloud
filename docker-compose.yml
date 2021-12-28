@@ -27,10 +27,9 @@ services:
       - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
       - WORDPRESS_DB_NAME=wordpress
     volumes:
-      - type: bind
+      - type: bind  
         source: /var/lib/efs
         target: /var/www/html
-      #wordpress:/var/www/html
     networks:
       - app-network
 
@@ -43,9 +42,9 @@ services:
     ports:
       - "80:80"
     volumes:
-      - wordpress:/var/www/html
+      - /var/lib/efs:/var/www/html
       - ./nginx-conf:/etc/nginx/conf.d
-      - certbot-etc:/etc/letsencrypt
+      # - certbot-etc:/etc/letsencrypt
     networks:
       - app-network
 
@@ -57,7 +56,7 @@ services:
     volumes:
       - certbot-etc:/etc/letsencrypt
       - wordpress:/var/www/html
-    command: certonly --webroot --webroot-path=/var/www/html --email angelina.rumuy@ti.ukdw.ac.id --agree-tos --no-eff-email -d wordpres-finalcloud-1947216164.us-east-1.elb.amazonaws.com
+    command: certonly --webroot --webroot-path=/var/www/html --email mishael.elian@ti.ukdw.ac.id --agree-tos --no-eff-email -d wordpres-finalcloud-815283555.us-east-1.elb.amazonaws.com
 
 volumes:
   certbot-etc:
