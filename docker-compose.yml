@@ -57,7 +57,7 @@ services:
     container_name: certbot
     volumes:
       - certbot-etc:/etc/letsencrypt
-      - wordpress:/var/www/html
+      - /var/lib/efs/wordpress:/var/www/html
     command: certonly --webroot --webroot-path=/var/www/html --email mishael.elian@ti.ukdw.ac.id --agree-tos --no-eff-email -d wordpres-finalcloud-815283555.us-east-1.elb.amazonaws.com
 
 volumes:
