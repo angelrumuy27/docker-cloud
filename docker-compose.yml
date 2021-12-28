@@ -21,7 +21,7 @@ services:
     #   - db
     image: wordpress:5.1.1-fpm-alpine
     container_name: wordpress
-    restart: unless-stopped
+    restart: always
     env_file: .env
     environment:
       - WORDPRESS_DB_HOST=cloud-final.cy8x8vyjtlwm.us-east-1.rds.amazonaws.com:3306
@@ -40,7 +40,7 @@ services:
       - wordpress
     image: nginx:1.15.12-alpine
     container_name: webserver
-    restart: unless-stopped
+    restart: always
     ports:
       - "80:80"
     volumes:
