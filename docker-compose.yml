@@ -9,7 +9,9 @@ services:
     environment:
       - MYSQL_DATABASE=wordpress
     volumes:
-      - dbdata:/var/lib/mysql
+      - type: bind
+        source: /var/lib/efs/mysql
+        target: /var/lib/mysql
     command: '--default-authentication-plugin=mysql_native_password'
     networks:
       - app-network
@@ -27,8 +29,8 @@ services:
       - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
       - WORDPRESS_DB_NAME=wordpress
     volumes:
-      - type: bind  
-        source: /var/lib/efs
+      - type: bind
+        source: /var/lib/efs/wordpress
         target: /var/www/html
     networks:
       - app-network
@@ -60,8 +62,8 @@ services:
 
 volumes:
   certbot-etc:
-  wordpress:
-  dbdata:
+  # wordpress:
+  # dbdata:
 
 networks:
   app-network:
